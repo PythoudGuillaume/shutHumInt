@@ -141,12 +141,12 @@ strip.begin()
 
 while True:
 
-
-        response = pickle.loads(client.recv(255))
-        if response != "":
-                print(response)
-                react(strip, response)
-        else if response == "stop":
+        try:
+            response = pickle.loads(client.recv(255))
+            if response != "":
+                    print(response)
+                    react(strip, response)
+        except:
             break
 
 
