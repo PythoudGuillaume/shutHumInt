@@ -69,7 +69,7 @@ def react(strip, leds):
         strip.setPixelColor(i,c)
     strip.show()
 
-# Define functions which animate LEDs in various ways. 
+# Define functions which animate LEDs in various ways.
 
 def colorWipe(strip, color, wait_ms=50):
 	"""Wipe color across display a pixel at a time."""
@@ -146,11 +146,12 @@ while True:
         if response != "":
                 print(response)
                 react(strip, response)
+        else if response == "stop":
+            break
 
 
 
-        
+
 print("Close")
 client.close()
 stock.close()
-
