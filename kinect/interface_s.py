@@ -146,7 +146,7 @@ while True:
         if response != "":
                 print(response)
                 react(strip, response)
-        else if response == "stop":
+        elif response == "stop":
             break
 
 
