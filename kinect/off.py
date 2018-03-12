@@ -8,7 +8,11 @@ import time
 from neopixel import *
 
 import argparse
+import signal
 import sys
+def signal_handler(signal, frame):
+        colorWipe(strip, Color(0,0,0))
+        sys.exit(0)
 
 # LED strip configuration:
 LED_COUNT      = 30      # Number of LED pixels.
@@ -25,10 +29,12 @@ LED_CHANNEL    = 0       # set to '1' for GPIOs 13, 19, 41, 45 or 53
 LED_STRIP      = ws.WS2811_STRIP_GRB   # Strip type and colour ordering
 
 
+# Main program logic follows:
+if __name__ == '__main__':
 
-# Create NeoPixel object with appropriate configuration.
-strip = Adafruit_NeoPixel(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS, LED_CHANNEL, LED_STRIP)
-for i in range(strip.numPixels()):
-    	strip.setPixelColor(i, Color(0,0,0))
-strip.show()
-print ( 'led off' )
+	# Create NeoPixel object with appropriate configuration.
+	strip = Adafruit_NeoPixel(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS, LED_CHANNEL, LED_STRIP)
+	for i in range(strip.numPixels()):
+        strip.setPixelColor(i, Color(0,0,0))
+	strip.show()
+    print ( 'led off' )
