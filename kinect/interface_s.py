@@ -147,6 +147,7 @@ while True:
                     print(response)
                     react(strip, response)
         except:
+            print(response+"\n smthg wrong happen")
             break
 
 
