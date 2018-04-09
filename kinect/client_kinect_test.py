@@ -61,16 +61,6 @@ bigdepth = Frame(1920, 1082, 4) if need_bigdepth else None
 color_depth_map = np.zeros((424, 512),  np.int32).ravel() \
     if need_color_depth_map else None
 
-i = 0
-
-hote = "raspberrypi"
-port = 15555
-
-
-socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-socket.connect((hote, port))
-print("Connection on {}".format(port))
-
 while True:
     frames = listener.waitForNewFrame()
 
@@ -82,19 +72,13 @@ while True:
                        bigdepth=bigdepth,
                        color_depth_map=color_depth_map)
 
-    dImg = depth.asarray()
-    cv2.imshow("depth", dImg/4500.)
+    noZero = depth.asarray()
+    #noZero[noZero == 0.0]
+    dImg = depth.asarray()/4500.
+    cv2.imshow("depth", dImg)
     leds = cv2.resize(dImg, (6,5))
     lel = cv2.resize(leds, (600,500))
     cv2.imshow("lowDepth", lel)
-    leds = leds.flatten()
-
-    if( i % 5 == 0):
-            data = pickle.dumps(leds.astype(int).tolist(),protocol=2)
-            socket.send(data)
-            print(time.strftime("%H:%M:%S"))
-
-    i+=1
 
     listener.release(frames)
 
