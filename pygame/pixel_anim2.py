@@ -70,7 +70,7 @@ def draw_background(screen):
     screen.fill(background)
 
 
-    pygame.draw.rect(screen,(100,100,100),(25*e,2*e,3*e,10*e))
+    #pygame.draw.rect(screen,(100,100,100),(25*e,2*e,3*e,10*e))
     pygame.draw.rect(screen,background,(450,0,100,100))
 
 
