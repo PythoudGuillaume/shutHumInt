@@ -1,0 +1,13 @@
+LEDs :
+
+    - 20m ws2812b leds strip 30leds/m //40m:
+
+        1. https://www.adafruit.com/product/1460?length=5 (~915$)
+
+        2.  https://www.aliexpress.com/item/1m-4m-5m-WS2812B-Smart-led-pixel-strip-Black-White-PCB-30-60-144-leds-m/2036819167.html?spm=2114.search0104.3.7.5e631c60wCRctr&ws_ab_test=searchweb0_0,searchweb201602_4_10152_10151_10065_10344_10068_10342_10343_10340_10341_10696_10084_10083_10618_10307_10134_10313_10059_10534_100031_10103_10627_10626_10624_10623_10622_10621_10620,searchweb201603_25,ppcSwitch_4&algo_expid=87335149-f51e-4eff-b991-a92206330e48-0&algo_pvid=87335149-f51e-4eff-b991-a92206330e48&transAbTest=ae803_4&priceBeautifyAB=0 (~120$)
+
+    - power supply 5v80A  :
+
+        1. https://fr.aliexpress.com/item/Hot-Sale-AC85-265V-110V-220V-to-DC5V-12V-24V-36V-48V-1A-2A-3A-5A/32780272089.html?spm=a2g0w.search0104.3.1.5ec84738RAC94v&ws_ab_test=searchweb0_0,searchweb201602_3_10152_10151_10065_10344_10068_10342_10343_10340_10341_10696_10084_10083_10618_10307_10134_10313_10059_10534_100031_10103_10627_10626_10624_10623_10622_10621_10620-10620,searchweb201603_2,ppcSwitch_4&algo_expid=2a2d365f-a16d-41b3-865e-1c08f84b900c-0&algo_pvid=2a2d365f-a16d-41b3-865e-1c08f84b900c&priceBeautifyAB=0 (40$)
+
+        2. 2x https://www.ebay.co.uk/itm/DC-3-3V-5V-12V-24V-36V-48V-Universal-Regulated-Switching-Power-Supply-LED-CCT/151886747221?hash=item235d27d655:m:mQZovYXghnw8y48gBQEuuLw (45£)
