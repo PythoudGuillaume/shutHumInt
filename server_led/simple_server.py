@@ -53,6 +53,7 @@ while True:
                     for p in response:
                         new_p = to_dis(p)
                         strip.setPixelColor(new_p,white)
+                        strip.setPixelColor(450+new_p,white)
                     strip.show()
 
 
