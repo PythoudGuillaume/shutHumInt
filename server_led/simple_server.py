@@ -27,21 +27,40 @@ print("{} connected".format( address ))
 strip = Adafruit_NeoPixel(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS, LED_CHANNEL, LED_STRIP)
 ## Intialize the library (must be called once before other functions).
 strip.begin()
+white = Color(255,255,255)
+black = Color(0,0,0)
+def to_dis(n):
+    step = int(n/45)
+    print(step)
+    print(step%2)
+    if step%2 == 1:
+        
+        return ((step*45-1)+(45-n%45))
+    else :
+        return n
 
 while True:
 
         try:
             response = pickle.loads(client.recv(255))
         except:
-            print('pickle error')
+            break
         if response != "":
-                    print(response)
+                    #print(response)
+                    for i in range(strip.numPixels()):
+                        strip.setPixelColor(i,black)
+
                     for p in response:
-                        strip.setPixelColor(p,(255,255,255))
+                        new_p = to_dis(p)
+                        strip.setPixelColor(new_p,white)
+                    strip.show()
 
 
 
 
 
+for i in range(strip.numPixels()):
+    strip.setPixelColor(i,black)
+strip.show()
 print("Close")
 client.close()
