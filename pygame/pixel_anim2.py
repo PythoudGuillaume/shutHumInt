@@ -31,17 +31,25 @@ pause = 0
 
 foreground = (255,255,255)
 background = (0,0,0)
+pedestrian = (0,200,00)
 
 eyes_pixel = []
 
 pygame.mixer.pre_init(44100, -16, 2, 512)
 pygame.mixer.init()
 pygame.init()
-beep = pygame.mixer.Sound('fuzzy_beep_short.wav')
+beep = pygame.mixer.Sound('coin.wav')
+#whistle
+
+#change particles speed regarding the position
+
+#wall e
+#mario song
+#http://www.mariomayhem.com/downloads/sounds/
 
 start = pygame.mixer.Sound('train_start.wav')
 start = pygame.mixer.Sound('win31.wav')
-start = pygame.mixer.Sound('carstart.wav')
+start = pygame.mixer.Sound('powerup.wav')
 
 #http://soundbible.com/291-Fuzzy-Beep.html
 
@@ -62,23 +70,57 @@ def random_color():
     return (fg,bg)
 
 def sound_detect(lvl = 10, snd = beep):
-    snd.play(loops=lvl-1, maxtime=0, fade_ms=0)
-    print('played')
+    if focus > 1:
+        snd.play(loops=lvl-1, maxtime=0, fade_ms=0)
+        print('played')
 
+
+detected = [20, 50, 90]
 
 def draw_background(screen):
+
+    global detected, detect_lev, focus
+    new_d = []
     screen.fill(background)
+    if focus > 1:
+        detect_lev = len(detected)
+        if not detected:
+            for _ in range(random.randint(0,4)):
+                detected.append(random.randint(30,60))
+
+        for d in detected:
+            print(d)
+            if d > 45:
+                rd = d + 10
+            else :
+                rd = d
+            c = 2
+            pygame.draw.rect(screen,pedestrian,((rd-1)*e,2*e,2*e,8*e))
+            h = 2
+            while h < 8:
+                pygame.draw.rect(screen,pedestrian,((rd-1-c)*e,(2+h)*e,2*e,8*e))
+                pygame.draw.rect(screen,pedestrian,((rd-1+c)*e,(2+h)*e,2*e,8*e))
+                h+= 2
+                c+= 2
+
+            if d >= 45 and d < 100:
+                new_d.append(d+1)
+            elif d > -10 and d < 45:
+                new_d.append(d-1)
 
 
-    #pygame.draw.rect(screen,(100,100,100),(25*e,2*e,3*e,10*e))
-    pygame.draw.rect(screen,background,(450,0,100,100))
+        detected = new_d
+        print(detected)
+        if not detected:
+            focus = 1
+
+    pygame.draw.rect(screen,(40,40,40),(450,0,100,100))
 
 
 
 #animtion function
 def anim_blink(screen):
     global blink, blink_i,state, speed
-    speed = 30
     if blink == (focus-1) :
         state = 4
         blink = focus
@@ -146,12 +188,12 @@ def anim_look(screen):
         if random.randint(0,10) > 7:
             blink = focus
             state = 5
-    (r,g,b) = background
-    if not g == 200:
-        g+=25
-        if g > 255:
-            g = 255
-        background = (r,g,b)
+    #(r,g,b) = background
+    #if not g == 200:
+    #    g+=25
+    #    if g > 255:
+    #        g = 255
+    #    background = (r,g,b)
 
 
 
@@ -173,16 +215,16 @@ def anim_look_stop(screen):
     eyes_pixel = new_p
     if not eyes_pixel:
         state = 3
-        background = (0,0,0)
+        #sbackground = (0,0,0)
         draw_pixel(screen)
     print(eyes_pixel)
 
-    (r,g,b) = background
-    if not g == 0:
-        g-=50
-        if g < 0:
-            g = 0
-        background = (r,g,b)
+    #(r,g,b) = background
+    #if not g == 0:
+    #    g-=50
+    #    if g < 0:
+    #        g = 0
+    #    background = (r,g,b)
 
 
 def anim_start():
@@ -231,7 +273,11 @@ def anim_speed():
         p = random.randint(0,449)
         pixels.append(p)
     for p in pixels:
-        x,y =(p%w)+1,int(p/w)
+        x,y =(p%w),int(p/w)
+        max = int((x*5)/44)
+        min = int((x*3)/44)
+        val = random.randint(min,max)
+        x = x+(1+val)
         if x > 44:
             x = 0
             y = random.randint(0,9)
@@ -257,12 +303,14 @@ def anim_stop():
 def draw_pixel(screen):
 
     screen.fill(background)
-    pygame.draw.rect(screen,background,(450,0,100,100))
+    pygame.draw.rect(screen,(40,40,40),(450,0,100,100))
     for p in pixels:
         x,y =(p%w*e),int(p/w)*e
         pygame.draw.rect(screen,foreground,(550 + x,y,e,e))
         pygame.draw.rect(screen,foreground,(440 - x,y,e,e))
     pygame.display.flip()
+    print(pixels)
+
 
 def anim_pixel(screen):
     print(laststate)

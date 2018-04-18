@@ -28,3 +28,23 @@ Audio is more problematic, it should not become a pollution, this is why I choos
 ### Detection
 * bepping soud, when something is detected, the number of beeping increase with the number of things detected
 * 4 speakers to be able to direct the sound and avoid pollution
+
+
+# TODO
+* power ? https://www.amazon.com/ENERGIZER-Inverter-converts-battery-compatible/dp/B00APL77NW
+* link between rpi and laptop => try with raspberry pi zero and use it as usb gadget maybe or share connection via rj45
+
+
+# POWER
+
+### Watts ?
+* leds: 60A*5V = 300W
+* rpi: 2.5A*5V = 12.5W
+* kinect: 2.7A*12V x2 = 65W
+* laptop: 70W
+* total:  447.5
+
+# Mount
+
+* bache => landi 19.-
+* bache opaque ?
