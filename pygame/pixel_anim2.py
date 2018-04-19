@@ -3,6 +3,7 @@ from PIL import Image
 import random
 import time
 import sys
+import simple_client
 
 h = 10
 w = 45
@@ -53,6 +54,11 @@ start = pygame.mixer.Sound('powerup.wav')
 
 #http://soundbible.com/291-Fuzzy-Beep.html
 
+
+hote = "10.42.0.27"
+port = 15555
+
+client = simple_client.Client(hote, port)
 #utility function
 def img_2_list(img):
     im = Image.open(img)
@@ -300,6 +306,7 @@ def anim_stop():
     else :
         #state = 4
         print('no more pixels')
+
 def draw_pixel(screen):
 
     screen.fill(background)
@@ -309,6 +316,7 @@ def draw_pixel(screen):
         pygame.draw.rect(screen,foreground,(550 + x,y,e,e))
         pygame.draw.rect(screen,foreground,(440 - x,y,e,e))
     pygame.display.flip()
+    client.send(pixels)
     print(pixels)
 
 

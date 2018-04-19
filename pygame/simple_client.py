@@ -1,6 +1,6 @@
 import socket, pickle,random,time
 
-class Sender:
+class Client:
     def __init__(self, host, port):
 
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
