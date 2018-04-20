@@ -1,4 +1,4 @@
-import socket,pickle
+import socket,pickle, random, random
 from neopixel import *
 
 # LED strip configuration:
@@ -39,14 +39,18 @@ def to_dis(n):
     else :
         return n
 
+def random_color():
+    return Color(random.randint(0,255),random.randint(0,255),random.randint(0,255))
+
 while True:
 
         try:
-            response = pickle.loads(client.recv(255))
-        except:
+            response = pickle.loads(client.recv(2000))
+        except Exception as e:
+            print(e)    
             break
         if response != "":
-                    #print(response)
+                    print(response)
                     for i in range(strip.numPixels()):
                         strip.setPixelColor(i,black)
 
