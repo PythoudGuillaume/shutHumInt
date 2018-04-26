@@ -54,10 +54,10 @@ while True:
                     for i in range(strip.numPixels()):
                         strip.setPixelColor(i,black)
 
-                    for p in response:
+                    for p,c in response:
                         new_p = to_dis(p)
-                        strip.setPixelColor(new_p,white)
-                        strip.setPixelColor(450+new_p,white)
+                        strip.setPixelColor(new_p,Color(c))
+                        strip.setPixelColor(450+new_p,Color(c))
                     strip.show()
 
 
