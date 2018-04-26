@@ -15,6 +15,8 @@ LED_INVERT     = False   # True to invert the signal (when using NPN transistor 
 LED_CHANNEL    = 0       # set to '1' for GPIOs 13, 19, 41, 45 or 53
 LED_STRIP      = ws.WS2811_STRIP_GRB   # Strip type and colour ordering
 
+white = Color(255,255,255)
+black = Color(0,0,0)
 
 
 socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -27,14 +29,13 @@ print("{} connected".format( address ))
 strip = Adafruit_NeoPixel(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS, LED_CHANNEL, LED_STRIP)
 ## Intialize the library (must be called once before other functions).
 strip.begin()
-white = Color(255,255,255)
-black = Color(0,0,0)
+
 def to_dis(n):
     step = int(n/45)
     print(step)
     print(step%2)
     if step%2 == 1:
-        
+
         return ((step*45-1)+(45-n%45))
     else :
         return n
@@ -44,7 +45,7 @@ while True:
         try:
             response = pickle.loads(client.recv(255))
         except:
-            break
+            print("something weird happens")
         if response != "":
                     #print(response)
                     for i in range(strip.numPixels()):
