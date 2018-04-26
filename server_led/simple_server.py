@@ -70,9 +70,11 @@ while True:
                         strip.setPixelColor(i,black)
 
                     for p,c in response:
+                        r,g,b = c
+                        col = Color(rgb)
                         new_p = to_dis(p)
-                        strip.setPixelColor(new_p,Color(c))
-                        strip.setPixelColor(450+new_p,Color(c))
+                        strip.setPixelColor(new_p,col
+                        strip.setPixelColor(450+new_p,col
                     strip.show()
 
 
