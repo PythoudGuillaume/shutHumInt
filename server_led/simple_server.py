@@ -24,6 +24,10 @@ socket.bind(('', 15555))
 
 socket.listen(5)
 client, address = socket.accept()
+
+blocksize = 512
+sentinel = b'\x00\x00END_MESSAGE!\x00\x00'[:blocksize]
+
 print("{} connected".format( address ))
 # Create NeoPixel object with appropriate configuration.
 strip = Adafruit_NeoPixel(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS, LED_CHANNEL, LED_STRIP)
@@ -46,7 +50,18 @@ def random_color():
 while True:
 
         try:
-            response = pickle.loads(client.recv(255))
+            blocks = []
+            while True:
+                blocks.append(client.recv(512))
+
+                if blocks[-1] == sentinel:
+                    blocks.pop()
+                    print('lolilol')
+                    break
+
+            data = b''.join(blocks)
+
+            response = pickle.loads(data)
         except:
             print("something weird happens")
         if response != "":
