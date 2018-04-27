@@ -25,7 +25,7 @@ socket.bind(('', 15555))
 socket.listen(5)
 client, address = socket.accept()
 
-blocksize = 512
+blocksize = 16384
 sentinel = b'\x00\x00END_MESSAGE!\x00\x00'[:blocksize]
 
 print("{} connected".format( address ))
@@ -47,35 +47,45 @@ def to_dis(n):
 def random_color():
     return Color(random.randint(0,255),random.randint(0,255),random.randint(0,255))
 
-while True:
+def draw_pixels(pixels):
+    for i in range(strip.numPixels()):
+        strip.setPixelColor(i,black)
 
-        try:
+    for p,c in pixels:
+        r,g,b = c
+        col = Color(rgb)
+        new_p = to_dis(p)
+        strip.setPixelColor(new_p,col
+        strip.setPixelColor(450+new_p,col
+    strip.show()
+
+def server():
+    blocksize = 16384
+    sentinel = b'\x00\x00END_MESSAGE!\x00\x00'[:blocksize]
+
+    serversocket = socket.socket( socket.AF_INET, socket.SOCK_STREAM)
+    serversocket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+
+    serversocket.bind(('', 8051))
+    serversocket.listen(5)
+    render = Pixel_renderer()
+    while True:
+        clientsocket, address = serversocket.accept()
+        print("New client")
+
+        while True:
             blocks = []
             while True:
-                blocks.append(client.recv(512))
-
+                b = clientsocket.recv(blocksize)
+                blocks.append(b)
                 if blocks[-1] == sentinel:
                     blocks.pop()
-                    print('lolilol')
                     break
-
             data = b''.join(blocks)
+            list = pickle.loads(data)
+            draw_pixels(list)
 
-            response = pickle.loads(data)
-        except:
-            print("something weird happens")
-        if response != "":
-                    print(response)
-                    for i in range(strip.numPixels()):
-                        strip.setPixelColor(i,black)
 
-                    for p,c in response:
-                        r,g,b = c
-                        col = Color(rgb)
-                        new_p = to_dis(p)
-                        strip.setPixelColor(new_p,col
-                        strip.setPixelColor(450+new_p,col
-                    strip.show()
 
 
 
