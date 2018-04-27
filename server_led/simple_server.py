@@ -18,17 +18,6 @@ LED_STRIP      = ws.WS2811_STRIP_GRB   # Strip type and colour ordering
 white = Color(255,255,255)
 black = Color(0,0,0)
 
-
-socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-socket.bind(('', 15555))
-
-socket.listen(5)
-client, address = socket.accept()
-
-blocksize = 16384
-sentinel = b'\x00\x00END_MESSAGE!\x00\x00'[:blocksize]
-
-print("{} connected".format( address ))
 # Create NeoPixel object with appropriate configuration.
 strip = Adafruit_NeoPixel(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS, LED_CHANNEL, LED_STRIP)
 ## Intialize the library (must be called once before other functions).
