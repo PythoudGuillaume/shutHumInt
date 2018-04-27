@@ -47,18 +47,6 @@ def to_dis(n):
 def random_color():
     return Color(random.randint(0,255),random.randint(0,255),random.randint(0,255))
 
-def draw_pixels(pixels):
-    for i in range(strip.numPixels()):
-        strip.setPixelColor(i,black)
-
-    for p,c in pixels:
-        r,g,b = c
-        col = Color(rgb)
-        new_p = to_dis(p)
-        strip.setPixelColor(new_p,col
-        strip.setPixelColor(450+new_p,col
-    strip.show()
-
 def server():
     blocksize = 16384
     sentinel = b'\x00\x00END_MESSAGE!\x00\x00'[:blocksize]
@@ -89,7 +77,7 @@ def server():
 
 
 
-
+server()
 
 for i in range(strip.numPixels()):
     strip.setPixelColor(i,black)
