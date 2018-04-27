@@ -25,10 +25,7 @@ strip.begin()
 
 def to_dis(n):
     step = int(n/45)
-    print(step)
-    print(step%2)
     if step%2 == 1:
-
         return ((step*45-1)+(45-n%45))
     else :
         return n
@@ -36,16 +33,28 @@ def to_dis(n):
 def random_color():
     return Color(random.randint(0,255),random.randint(0,255),random.randint(0,255))
 
-def draw_pixels(pixels):
+def draw_pixels(tup):
+    way, pixels = tup
+    print(way)
     for i in range(strip.numPixels()):
         strip.setPixelColor(i,black)
 
-    for p,c in pixels:
-        r,g,b = c
-        col = Color(rgb)
-        new_p = to_dis(p)
-        strip.setPixelColor(new_p,col
-        strip.setPixelColor(450+new_p,col
+    
+    if way == 1:
+        for p,c in pixels:
+            r,g,b = c
+            col = Color(r,g,b)
+            new_p = to_dis(p)
+            strip.setPixelColor(new_p,col)
+            strip.setPixelColor(450+new_p,col)
+    elif way == 2:
+        print(len(pixels))
+        for i, tab in enumerate(pixels):
+            for p,c in tab:
+                r,g,b = c
+                col = Color(r,g,b)
+                new_p = to_dis(p)
+                strip.setPixelColor(i*450 + new_p,col)
     strip.show()
 
 def server():
@@ -57,7 +66,7 @@ def server():
 
     serversocket.bind(('', 8051))
     serversocket.listen(5)
-    render = Pixel_renderer()
+    
     while True:
         clientsocket, address = serversocket.accept()
         print("New client")
@@ -71,8 +80,9 @@ def server():
                     blocks.pop()
                     break
             data = b''.join(blocks)
-            list = pickle.loads(data)
-            draw_pixels(list)
+            pl = pickle.loads(data)
+            print(pl)
+            draw_pixels(pl)
 
 
 
